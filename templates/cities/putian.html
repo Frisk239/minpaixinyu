@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}莆田详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/putian.jpg') }}" 
+                 alt="莆田城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>莆田</h1>
+                <p class="city-subtitle">妈祖故乡，鞋都</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：福建省东部沿海，台湾海峡西岸</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：约290万人</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：莆田话（莆仙方言）</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>莆田市位于福建省东部沿海，是妈祖文化的发祥地，也是著名的侨乡。莆田以制鞋业闻名，是中国重要的鞋业生产基地，同时医疗产业也十分发达，素有"中国鞋都"和"医疗之乡"的美誉。</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-temple"></i>
+                            <h4>妈祖故乡</h4>
+                            <p>妈祖信仰的发源地，湄洲岛是海内外妈祖信众的朝圣中心，妈祖文化影响深远。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-shoe-prints"></i>
+                            <h4>中国鞋都</h4>
+                            <p>全国重要的鞋业生产基地，制鞋工艺精湛，鞋业产业链完整，品牌影响力大。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-hospital"></i>
+                            <h4>医疗产业</h4>
+                            <p>民营医疗产业发展迅速，在全国具有重要影响力，医疗资源丰富，技术水平先进。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <h4>侨乡文化</h4>
+                            <p>著名侨乡，海外侨胞众多，侨资侨力丰富，对外交流合作活跃，侨乡文化特色鲜明。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/mazu_culture.jpg') }}" 
+                                 alt="妈祖文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>妈祖文化</h3>
+                            <p>莆田是妈祖信仰的发源地，妈祖文化源远流长。湄洲妈祖祖庙是世界妈祖信众的朝圣中心，妈祖信俗被列入人类非物质文化遗产代表作名录。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">世界遗产</span>
+                                <span class="feature-tag">海洋信仰</span>
+                                <span class="feature-tag">文化交流</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/puxian_culture.jpg') }}" 
+                                 alt="莆仙文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>莆仙文化</h3>
+                            <p>莆田独特的区域文化，莆仙戏、莆仙方言、莆仙民俗等独具特色。莆仙戏是古老的地方戏曲剧种，表演艺术精湛。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">地方戏曲</span>
+                                <span class="feature-tag">方言文化</span>
+                                <span class="feature-tag">民俗传统</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/business_culture.jpg') }}" 
+                                 alt="商业文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>商业文化</h3>
+                            <p>莆田人经商传统悠久，商业文化发达。鞋业、医疗、木材、珠宝等产业发展迅速，形成了独特的莆商文化。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">经商传统</span>
+                                <span class="feature-tag">产业发展</span>
+                                <span class="feature-tag">创新创业</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/meizhou_island.jpg') }}" 
+                                 alt="湄洲岛"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>湄洲岛</h3>
+                            <p class="attraction-type">妈祖朝圣</p>
+                            <p class="attraction-desc">妈祖信仰的发源地，湄洲妈祖祖庙是世界妈祖信众的朝圣中心。岛上风光秀丽，妈祖文化氛围浓厚。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以参观妈祖祖庙，了解妈祖文化，参与妈祖信俗活动，欣赏海岛风光，品尝海鲜美食。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/jiuli_hu.jpg') }}" 
+                                 alt="九鲤湖"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>九鲤湖</h3>
+                            <p class="attraction-type">风景名胜</p>
+                            <p class="attraction-desc">省级风景名胜区，以湖光山色和道教文化闻名。湖水清澈，山林茂密，是休闲度假的好去处。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以游湖观景，登山健身，参观道教宫观，体验自然风光和人文景观的结合。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/guanghua_temple.jpg') }}" 
+                                 alt="广化寺"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>广化寺</h3>
+                            <p class="attraction-type">佛教寺院</p>
+                            <p class="attraction-desc">福建著名佛教寺院，始建于南朝，历史悠久。寺内建筑宏伟，文物丰富，是重要的佛教文化圣地。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以参观古建筑，了解佛教文化，感受寺庙的宁静氛围，参与佛教活动。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/puxian_miantang.jpg') }}" 
+                                 alt="莆仙卤面"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>莆仙卤面</h3>
+                            <p class="food-type">传统面食</p>
+                            <p class="food-desc">莆田特色面食，面条筋道，卤汁浓郁，配料丰富，有猪肉、海鲜、蔬菜等，味道鲜美，是莆田人日常喜爱的美食。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>面条、猪肉、海鲜、香菇、青菜等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/xianyou_miantang.jpg') }}" 
+                                 alt="仙游扁食"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>仙游扁食</h3>
+                            <p class="food-type">特色小吃</p>
+                            <p class="food-desc">莆田仙游特色小吃，皮薄馅多，汤汁鲜美，可以煮、蒸、煎等多种烹饪方式，深受当地人喜爱。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>面粉、猪肉、虾仁、香菇、葱花等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/putian_mifen.jpg') }}" 
+                                 alt="莆田米粉"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>莆田米粉</h3>
+                            <p class="food-type">传统主食</p>
+                            <p class="food-desc">莆田特色米粉，细如发丝，口感爽滑，可以炒、煮、拌等多种吃法，是莆田人日常主食之一。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>大米、水</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <form action="{{ url_for('mark_explored') }}" method="POST">
+            <input type="hidden" name="city_name" value="莆田">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> 标记为已探索
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+<script>
+// 页面加载时标记为已探索
+document.addEventListener('DOMContentLoaded', function() {
+    markCityExplored('莆田');
+});
+</script>
+{% endblock %}

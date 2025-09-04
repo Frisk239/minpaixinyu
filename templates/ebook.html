@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}学习日志{% endblock %}
+
+{% block head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ebook.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="ebook-container">
+    <div class="ebook-header">
+        <h1>学习日志电子书</h1>
+        <p>阅读您的学习笔记，记录成长历程</p>
+    </div>
+    
+    <div class="ebook-controls">
+        <button id="prev-page" class="nav-btn" title="上一页">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        
+        <div class="page-info">
+            <span id="page-num">第 1 页</span>
+            <span> / </span>
+            <span id="page-count">共 ? 页</span>
+        </div>
+        
+        <button id="next-page" class="nav-btn" title="下一页">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <div class="zoom-controls">
+            <button id="zoom-out" class="zoom-btn" title="缩小">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <button id="zoom-reset" class="zoom-btn" title="重置缩放">
+                <i class="fas fa-search"></i>
+            </button>
+            <button id="zoom-in" class="zoom-btn" title="放大">
+                <i class="fas fa-search-plus"></i>
+            </button>
+        </div>
+        
+        <div class="view-mode">
+            <button id="single-page" class="view-btn active" title="单页视图">
+                <i class="fas fa-file"></i>
+            </button>
+            <button id="spread-view" class="view-btn" title="双页视图">
+                <i class="fas fa-columns"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="ebook-content">
+        <div class="pdf-container" id="pdf-container">
+            <div class="pdf-viewer" id="pdf-viewer">
+                <canvas id="pdf-canvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="loading-pdf" id="loading-pdf">
+            <div class="loading-spinner"></div>
+            <p>正在加载PDF文档...</p>
+        </div>
+        
+        <div class="pdf-error" id="pdf-error" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>无法加载PDF文档，请检查文件路径是否正确。</p>
+        </div>
+    </div>
+    
+    <div class="ebook-footer">
+        <div class="reading-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <span id="progress-text">0%</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ebook.js') }}"></script>
+<script>
+// 初始化PDF阅读器
+document.addEventListener('DOMContentLoaded', function() {
+    const pdfUrl = "{{ url_for('serve_pdf', filename='xuexirizhi.pdf') }}";
+    initPDFViewer(pdfUrl);
+});
+</script>
+{% endblock %}

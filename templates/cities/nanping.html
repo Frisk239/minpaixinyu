@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}南平详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/nanping.jpg') }}" 
+                 alt="南平城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>南平</h1>
+                <p class="city-subtitle">闽北重镇，武夷胜地</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：福建省北部，闽江上游</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：约268万人</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：南平话（闽北方言）</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>南平市位于福建省北部，武夷山脉北段东南侧，闽江上游，是福建通往内地的咽喉要道。南平是福建重要的林业基地和旅游城市，以武夷山风景区闻名于世，素有"福建粮仓"、"南方林海"、"中国竹乡"之称。</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-mountain"></i>
+                            <h4>武夷胜地</h4>
+                            <p>拥有世界文化与自然双重遗产武夷山，以丹霞地貌和茶文化闻名，是福建最重要的旅游目的地。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-leaf"></i>
+                            <h4>茶都之乡</h4>
+                            <p>武夷岩茶的代表大红袍是中国十大名茶之一，茶文化历史悠久，品质优异享誉海内外。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-tree"></i>
+                            <h4>生态绿都</h4>
+                            <p>森林覆盖率高达78.29%，是福建省生态屏障和重要水源涵养地，生态环境质量优良。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-water"></i>
+                            <h4>闽江源头</h4>
+                            <p>闽江发源于武夷山脉，是福建省最大的河流，南平地处闽江上游，水资源丰富。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/wuyi_tea.jpg') }}" 
+                                 alt="武夷茶文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>茶文化</h3>
+                            <p>南平是武夷岩茶的发源地，茶文化历史悠久。大红袍、肉桂、水仙等名茶品质优异，茶艺茶道文化深厚，茶文化旅游独具特色。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">武夷岩茶</span>
+                                <span class="feature-tag">茶艺茶道</span>
+                                <span class="feature-tag">非物质文化遗产</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/minbei_culture.jpg') }}" 
+                                 alt="闽北文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>闽北文化</h3>
+                            <p>南平是闽北文化的代表，朱子文化、建本文化、建盏文化等独具特色。理学大师朱熹曾在武夷山讲学，影响深远。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">朱子文化</span>
+                                <span class="feature-tag">建本印刷</span>
+                                <span class="feature-tag">建盏艺术</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/forest_culture.jpg') }}" 
+                                 alt="森林文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>生态文化</h3>
+                            <p>南平森林资源丰富，生态文化独具特色。竹文化、林业文化、生态保护理念深入人心，是生态文明建设的典范。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">竹文化</span>
+                                <span class="feature-tag">林业传统</span>
+                                <span class="feature-tag">生态保护</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/wuyishan.jpg') }}" 
+                                 alt="武夷山"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>武夷山</h3>
+                            <p class="attraction-type">世界遗产</p>
+                            <p class="attraction-desc">世界文化与自然双重遗产，以丹霞地貌、九曲溪、古闽越文化闻名。拥有天游峰、大王峰、玉女峰等著名景点，是福建旅游的龙头。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>建议安排2-3天时间，可以乘坐竹筏游览九曲溪，攀登天游峰，参观武夷宫，品尝正宗武夷岩茶。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/dahongpao.jpg') }}" 
+                                 alt="大红袍景区"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>大红袍景区</h3>
+                            <p class="attraction-type">茶文化旅游</p>
+                            <p class="attraction-desc">以大红袍母树为核心的茶文化景区，可以参观千年古茶树，了解武夷岩茶制作工艺，体验茶文化之旅。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>最佳游览季节为春季采茶时节，可以观看茶艺表演，品尝各种武夷岩茶，购买正宗茶叶。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/jiuquxi.jpg') }}" 
+                                 alt="九曲溪"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>九曲溪</h3>
+                            <p class="attraction-type">自然风光</p>
+                            <p class="attraction-desc">武夷山的精华所在，溪水蜿蜒九曲，两岸奇峰怪石，乘坐竹筏顺流而下，可以欣赏到武夷山最美的山水画卷。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>竹筏游览约1.5小时，建议选择天气晴朗的日子，早晚光线最佳，拍照效果最好。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/wuyi_yancha.jpg') }}" 
+                                 alt="武夷岩茶"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>武夷岩茶</h3>
+                            <p class="food-type">茶饮</p>
+                            <p class="food-desc">武夷山特产，中国十大名茶之一，具有岩韵花香的特点。大红袍、肉桂、水仙等品种各具特色，品质优异。</p>
+                            <div class="food-ingredients">
+                                <strong>主要品种：</strong>
+                                <span>大红袍、肉桂、水仙、半天腰、白鸡冠等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/jianou_guangbing.jpg') }}" 
+                                 alt="建瓯光饼"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>建瓯光饼</h3>
+                            <p class="food-type">小吃</p>
+                            <p class="food-desc">建瓯传统名点，外酥内软，香气扑鼻。历史悠久，制作工艺独特，是闽北地区的代表性小吃。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>面粉、芝麻、猪肉、葱花等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/shaowu_youji.jpg') }}" 
+                                 alt="邵武游浆豆腐"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>邵武游浆豆腐</h3>
+                            <p class="food-type">小吃</p>
+                            <p class="food-desc">邵武特色豆腐制品，采用传统游浆工艺制作，口感细腻，豆香浓郁，可以煎、炸、煮等多种烹饪方式。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>黄豆、山泉水、传统凝固剂</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <form action="{{ url_for('mark_explored') }}" method="POST">
+            <input type="hidden" name="city_name" value="南平">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> 标记为已探索
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+<script>
+// 页面加载时标记为已探索
+document.addEventListener('DOMContentLoaded', function() {
+    markCityExplored('南平');
+});
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}用户注册{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>注册闽派新语</h2>
+            <p>加入我们，一起探索福建文化</p>
+        </div>
+        
+        {% if error %}
+        <div class="alert alert-error">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        {% if success %}
+        <div class="alert alert-success">
+            {{ success }}
+        </div>
+        {% endif %}
+        
+        <form method="POST" class="auth-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+                <small class="form-text">用户名长度3-20个字符，只能包含字母、数字和下划线</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+                <small class="form-text">密码长度至少6个字符</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">确认密码</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="avatar">头像（可选）</label>
+                <input type="file" id="avatar" name="avatar" class="form-control" accept="image/*">
+                <small class="form-text">支持JPG、PNG格式，最大2MB</small>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">注册</button>
+        </form>
+        
+        <div class="auth-footer">
+            <p>已有账号？ <a href="{{ url_for('login') }}">立即登录</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

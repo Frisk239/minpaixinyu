@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}互动问答{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>福建文化知识问答</h1>
+        <p>测试您对福建文化的了解程度</p>
+    </div>
+    
+    {% if not session.get('user_id') %}
+    <div class="login-required">
+        <div class="login-prompt">
+            <i class="fas fa-lock"></i>
+            <h3>需要登录</h3>
+            <p>请先登录才能参与互动问答</p>
+            <div class="auth-buttons">
+                <a href="{{ url_for('login') }}" class="btn">登录</a>
+                <a href="{{ url_for('register') }}" class="btn btn-secondary">注册</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    
+    <!-- 答题模式选择 -->
+    <div class="quiz-mode-selector" id="mode-selector">
+        <div class="mode-card" data-mode="practice">
+            <div class="mode-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h3>练习模式</h3>
+            <p>不限时练习，随时查看答案</p>
+            <button class="btn mode-btn" data-mode="practice">开始练习</button>
+        </div>
+        
+        <div class="mode-card" data-mode="exam">
+            <div class="mode-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <h3>考试模式</h3>
+            <p>限时答题，测试真实水平</p>
+            <button class="btn mode-btn" data-mode="exam">开始考试</button>
+        </div>
+    </div>
+    
+    <!-- 答题界面 -->
+    <div class="quiz-interface" id="quiz-interface" style="display: none;">
+        <div class="quiz-info">
+            <div class="quiz-stats">
+                <span class="stat-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span id="current-question">1</span>/<span id="total-questions">0</span>
+                </span>
+                <span class="stat-item" id="timer-container" style="display: none;">
+                    <i class="fas fa-clock"></i>
+                    <span id="timer">00:00</span>
+                </span>
+                <span class="stat-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="correct-count">0</span> 正确
+                </span>
+            </div>
+        </div>
+        
+        <div class="question-card" id="question-card">
+            <div class="question-content">
+                <h3 id="question-text">问题加载中...</h3>
+            </div>
+            
+            <div class="options-container" id="options-container">
+                <!-- 选项将通过JavaScript动态生成 -->
+            </div>
+            
+            <div class="quiz-actions">
+                <button id="prev-question" class="btn btn-secondary" disabled>上一题</button>
+                <button id="next-question" class="btn">下一题</button>
+                <button id="submit-answer" class="btn" style="display: none;">提交答案</button>
+                <button id="finish-quiz" class="btn" style="display: none;">完成答题</button>
+            </div>
+        </div>
+        
+        <div class="answer-feedback" id="answer-feedback" style="display: none;">
+            <div class="feedback-content">
+                <h4 id="feedback-title"></h4>
+                <p id="feedback-message"></p>
+                <div id="correct-answer" style="display: none;">
+                    <strong>正确答案：</strong>
+                    <span id="correct-option"></span>
+                </div>
+                <div id="explanation" style="display: none;">
+                    <strong>解析：</strong>
+                    <p id="explanation-text"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 结果界面 -->
+    <div class="quiz-results" id="quiz-results" style="display: none;">
+        <div class="result-card">
+            <div class="result-header">
+                <i class="fas fa-trophy"></i>
+                <h2>答题完成！</h2>
+            </div>
+            
+            <div class="result-stats">
+                <div class="stat">
+                    <span class="stat-value" id="total-score">0</span>
+                    <span class="stat-label">总分</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="correct-answers">0</span>
+                    <span class="stat-label">答对题数</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="accuracy">0%</span>
+                    <span class="stat-label">正确率</span>
+                </div>
+            </div>
+            
+            <div class="result-actions">
+                <button id="restart-quiz" class="btn">重新开始</button>
+                <button id="view-details" class="btn btn-secondary">查看详情</button>
+                <a href="{{ url_for('user_center') }}" class="btn btn-secondary">个人中心</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+{% endblock %}

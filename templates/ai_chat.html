@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}AI问答{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ai_chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="ai-chat-container">
+    <div class="ai-header">
+        <h1>闽派新语 AI 助手</h1>
+        <p>基于DeepSeek AI，为您解答福建文化相关问题</p>
+    </div>
+    
+    <div class="chat-wrapper">
+        <div class="chat-messages" id="chat-messages">
+            <div class="message ai-message">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>您好！我是闽派新语AI助手，很高兴为您服务。我可以为您解答关于福建文化、历史、旅游、美食等方面的问题。请问有什么可以帮您的吗？</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chat-input-container">
+            <form id="chat-form" class="chat-form">
+                <div class="input-group">
+                    <input type="text" id="user-input" placeholder="请输入您的问题..." class="chat-input" required>
+                    <button type="submit" class="send-btn" id="send-btn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="suggestions">
+        <h3>您可以尝试询问：</h3>
+        <div class="suggestion-buttons">
+            <button class="suggestion-btn" data-question="福建有哪些著名的旅游景点？">
+                福建有哪些著名的旅游景点？
+            </button>
+            <button class="suggestion-btn" data-question="闽南文化有什么特色？">
+                闽南文化有什么特色？
+            </button>
+            <button class="suggestion-btn" data-question="福州有哪些传统美食？">
+                福州有哪些传统美食？
+            </button>
+            <button class="suggestion-btn" data-question="福建的茶文化是怎样的？">
+                福建的茶文化是怎样的？
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 加载动画 -->
+<div id="loading" class="loading-overlay" style="display: none;">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <p>AI正在思考中...</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ai_chat.js') }}"></script>
+{% endblock %}

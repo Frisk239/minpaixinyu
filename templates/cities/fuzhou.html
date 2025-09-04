@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}福州详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/fuzhou.jpg') }}" 
+                 alt="福州城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>福州</h1>
+                <p class="city-subtitle">福建省会，榕城</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：福建省东部，闽江下游</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：约829万人</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：福州话（闽东方言）</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>福州是福建省的省会城市，有着2200多年的建城史，是国家历史文化名城。因城内遍植榕树，别称"榕城"。福州是中国东南沿海重要的贸易港口和海上丝绸之路的门户，也是近代中国最早开放的五个通商口岸之一。</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-tree"></i>
+                            <h4>榕城之称</h4>
+                            <p>福州因城内遍植榕树而得名"榕城"，现有古榕树近千株，其中最著名的有"榕树王"等。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-utensils"></i>
+                            <h4>闽菜发源地</h4>
+                            <p>福州是闽菜的发源地，以佛跳墙、鱼丸、肉燕等美食闻名，饮食文化底蕴深厚。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-history"></i>
+                            <h4>历史文化</h4>
+                            <p>拥有三坊七巷、鼓山、西湖公园等众多历史文化景点，人文荟萃，名人辈出。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-industry"></i>
+                            <h4>经济中心</h4>
+                            <p>作为福建省的经济、政治、文化中心，电子信息、机械制造等产业发展迅速。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/fuzhou_minju.jpg') }}" 
+                                 alt="闽剧文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>闽剧艺术</h3>
+                            <p>闽剧是福建主要的地方戏曲剧种之一，起源于明代，以福州方言演唱，唱腔优美，表演细腻，是国家级非物质文化遗产。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">传统戏曲</span>
+                                <span class="feature-tag">非物质文化遗产</span>
+                                <span class="feature-tag">地方特色</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/fuzhou_craft.jpg') }}" 
+                                 alt="传统工艺"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>传统工艺</h3>
+                            <p>福州的脱胎漆器、软木画、寿山石雕等传统工艺享誉海内外，其中脱胎漆器与北京景泰蓝、江西景德镇瓷器并称中国传统工艺"三宝"。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">脱胎漆器</span>
+                                <span class="feature-tag">寿山石雕</span>
+                                <span class="feature-tag">软木画</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/fuzhou_education.jpg') }}" 
+                                 alt="教育文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>教育重镇</h3>
+                            <p>福州历来重视教育，是中国近代教育的发祥地之一。福州一中、福建师范大学等名校辈出，培养了大量优秀人才。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">文化教育</span>
+                                <span class="feature-tag">人才辈出</span>
+                                <span class="feature-tag">历史传承</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/sanfangqixiang.jpg') }}" 
+                                 alt="三坊七巷"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>三坊七巷</h3>
+                            <p class="attraction-type">历史文化街区</p>
+                            <p class="attraction-desc">中国现存规模较大、保护较为完整的历史文化街区，有"中国城市里坊制度活化石"之称。这里走出了林则徐、严复、冰心等大量名人。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>建议安排半天时间，可以品尝当地小吃，参观名人故居，感受福州的历史文化底蕴。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/gushan.jpg') }}" 
+                                 alt="鼓山"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>鼓山</h3>
+                            <p class="attraction-type">风景名胜区</p>
+                            <p class="attraction-desc">福州著名的风景名胜区，以涌泉寺、摩崖石刻闻名。山上有历代摩崖题刻600多处，堪称福州碑林。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以选择徒步或乘坐缆车上山，最佳游览季节为春秋两季，可以俯瞰福州全景。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/west_lake.jpg') }}" 
+                                 alt="西湖公园"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>西湖公园</h3>
+                            <p class="attraction-type">城市公园</p>
+                            <p class="attraction-desc">福州历史最悠久的公园，有1700多年历史，是福州"三山两塔一条江"古城格局的重要组成部分。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>适合晨练、散步、游船，公园内植物种类丰富，四季景色各异，是市民休闲的好去处。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/fotiaoqiang.jpg') }}" 
+                                 alt="佛跳墙"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>佛跳墙</h3>
+                            <p class="food-type">招牌菜</p>
+                            <p class="food-desc">福州传统名菜，闽菜代表，选用鲍鱼、海参、鱼翅、干贝等高档食材，用老酒坛文火慢炖而成，香气扑鼻，味道鲜美。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>鲍鱼、海参、鱼翅、干贝、花菇、鸽蛋等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/fishball.jpg') }}" 
+                                 alt="鱼丸"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>鱼丸</h3>
+                            <p class="food-type">小吃</p>
+                            <p class="food-desc">福州特色小吃，选用新鲜鱼肉剁成茸，包入猪肉馅，口感Q弹，汤汁鲜美，是福州人日常喜爱的美食。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>鳗鱼、鲨鱼肉、猪肉、地瓜粉</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/rouyan.jpg') }}" 
+                                 alt="肉燕"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>肉燕</h3>
+                            <p class="food-type">小吃</p>
+                            <p class="food-desc">福州传统小吃，燕皮用猪肉捶打而成，薄如纸片，包入肉馅，煮熟后口感爽滑，是福州宴席必备菜肴。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>猪后腿肉、地瓜粉、猪肉馅</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <button id="mark-explored-btn" class="btn btn-primary">
+            <i class="fas fa-check-circle"></i> 标记为已探索
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+<script>
+// 页面加载时标记为已探索
+document.addEventListener('DOMContentLoaded', function() {
+    markCityExplored('福州');
+});
+</script>
+{% endblock %}

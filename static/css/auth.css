@@ -1,0 +1,321 @@
+/* 认证页面样式 */
+.auth-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, var(--beige-light) 0%, var(--primary-beige) 100%);
+}
+
+.auth-card {
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(93, 78, 55, 0.15);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    border: 1px solid var(--beige-dark);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-header h2 {
+    color: var(--text-dark);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.auth-header p {
+    color: var(--text-medium);
+    font-size: 1.1rem;
+}
+
+.auth-form {
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--beige-dark);
+    border-radius: 10px;
+    font-size: 16px;
+    transition: var(--transition);
+    background: var(--beige-light);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.2);
+    background: var(--white);
+}
+
+.form-text {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.auth-form .btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--beige-dark);
+}
+
+.auth-footer p {
+    color: var(--text-medium);
+    margin-bottom: 0;
+}
+
+.auth-footer a {
+    color: var(--gold-accent);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.auth-footer a:hover {
+    color: var(--text-dark);
+    text-decoration: underline;
+}
+
+/* 文件上传样式 */
+input[type="file"] {
+    padding: 12px;
+}
+
+input[type="file"]::file-selector-button {
+    background: var(--gold-accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: var(--transition);
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--text-dark);
+}
+
+/* 错误消息样式 */
+.alert {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+}
+
+.alert-error {
+    background-color: #fee;
+    color: #c33;
+    border-color: #fcc;
+}
+
+.alert-success {
+    background-color: #efe;
+    color: #363;
+    border-color: #cfc;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 20px 15px;
+    }
+    
+    .auth-card {
+        padding: 30px 25px;
+    }
+    
+    .auth-header h2 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 25px 20px;
+    }
+    
+    .auth-header h2 {
+        font-size: 1.6rem;
+    }
+    
+    .auth-header p {
+        font-size: 1rem;
+    }
+    
+    .form-control {
+        padding: 12px 14px;
+    }
+}
+
+/* 加载状态 */
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin: -10px 0 0 -10px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 密码强度指示器 */
+.password-strength {
+    margin-top: 8px;
+    height: 4px;
+    background: var(--beige-dark);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.strength-meter {
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.strength-weak { background: #ff4757; width: 33%; }
+.strength-medium { background: #ffa502; width: 66%; }
+.strength-strong { background: #2ed573; width: 100%; }
+
+/* 头像预览 */
+.avatar-preview {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.avatar-preview img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--gold-accent);
+}
+
+/* 表单验证样式 */
+.form-control.invalid {
+    border-color: #ff4757;
+    box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
+}
+
+.form-control.valid {
+    border-color: #2ed573;
+    box-shadow: 0 0 0 3px rgba(46, 213, 115, 0.2);
+}
+
+.validation-message {
+    font-size: 0.85rem;
+    margin-top: 6px;
+    display: none;
+}
+
+.validation-message.error {
+    color: #ff4757;
+    display: block;
+}
+
+.validation-message.success {
+    color: #2ed573;
+    display: block;
+}
+
+/* 社交登录按钮（可选功能） */
+.social-login {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.social-divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: var(--text-light);
+}
+
+.social-divider::before,
+.social-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--beige-dark);
+}
+
+.social-divider span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
+
+.social-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--beige-dark);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.social-btn:hover {
+    background: var(--beige-light);
+    transform: translateY(-1px);
+}
+
+.social-btn.google { color: #DB4437; }
+.social-btn.wechat { color: #07C160; }

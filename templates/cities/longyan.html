@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}龙岩详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/longyan.jpg') }}" 
+                 alt="龙岩城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>龙岩</h1>
+                <p class="city-subtitle">客家祖地，红色圣地</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：福建省西部，闽粤赣三省交界</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：约272万人</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：龙岩话（客家方言）</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>龙岩市位于福建省西部，地处闽粤赣三省交界，是重要的客家聚居地和革命老区。龙岩是客家人的重要祖籍地，也是原中央苏区的重要组成部分，被誉为"客家祖地"和"红色圣地"。</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <h4>客家祖地</h4>
+                            <p>世界客家人重要的祖籍地和聚居地，客家文化底蕴深厚，客家土楼建筑独具特色。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-monument"></i>
+                            <h4>红色圣地</h4>
+                            <p>原中央苏区的重要组成部分，古田会议旧址等革命遗址众多，红色文化资源丰富。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-building"></i>
+                            <h4>土楼之乡</h4>
+                            <p>拥有永定土楼等世界文化遗产，客家土楼建筑风格独特，堪称建筑奇迹。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-mountain"></i>
+                            <h4>生态宝库</h4>
+                            <p>森林覆盖率高达78%，矿产资源丰富，是福建省重要的生态屏障和资源基地。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/hakka_culture.jpg') }}" 
+                                 alt="客家文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>客家文化</h3>
+                            <p>龙岩是客家民系的重要发祥地和聚居地，客家文化底蕴深厚。客家语言、客家民俗、客家建筑、客家饮食等独具特色，是世界客家文化的重要组成部分。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">客家方言</span>
+                                <span class="feature-tag">民俗传统</span>
+                                <span class="feature-tag">宗族文化</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/red_culture.jpg') }}" 
+                                 alt="红色文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>红色文化</h3>
+                            <p>龙岩是原中央苏区的重要组成部分，红色文化资源丰富。古田会议、才溪乡调查等重大历史事件在此发生，留下了宝贵的革命文化遗产。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">革命遗址</span>
+                                <span class="feature-tag">红色旅游</span>
+                                <span class="feature-tag">革命精神</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/tulou_culture.jpg') }}" 
+                                 alt="土楼文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>土楼文化</h3>
+                            <p>客家土楼是龙岩最具特色的文化遗产，集居住、防御、祭祀等功能于一体，建筑风格独特，体现了客家人的智慧和创造力，被列入世界文化遗产名录。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">世界遗产</span>
+                                <span class="feature-tag">建筑奇迹</span>
+                                <span class="feature-tag">客家智慧</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/yongding_tulou.jpg') }}" 
+                                 alt="永定土楼"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>永定土楼</h3>
+                            <p class="attraction-type">世界文化遗产</p>
+                            <p class="attraction-desc">客家土楼的代表，包括振成楼、承启楼、初溪土楼群等，建筑风格独特，功能齐全，体现了客家人的智慧和创造力。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>建议安排1-2天时间，可以参观不同类型的土楼，了解客家文化，品尝客家美食，体验客家生活。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/gutian.jpg') }}" 
+                                 alt="古田会议旧址"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>古田会议旧址</h3>
+                            <p class="attraction-type">红色旅游</p>
+                            <p class="attraction-desc">中国革命历史上重要的会议地点，古田会议确立了党对军队的绝对领导，是人民军队建设史上的重要里程碑。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以参观古田会议纪念馆、会议旧址，了解中国革命历史，接受红色教育，适合爱国主义教育活动。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/guanzhishan.jpg') }}" 
+                                 alt="冠豸山"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>冠豸山</h3>
+                            <p class="attraction-type">风景名胜区</p>
+                            <p class="attraction-desc">国家4A级旅游景区，以丹霞地貌和喀斯特地貌并存为特色，山势险峻，景色秀丽，有"阳刚天下第一，阴柔举世无双"之美誉。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>最佳游览季节为春秋两季，可以登山观景，欣赏丹霞地貌，体验大自然的鬼斧神工。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/hakka_niangdoufu.jpg') }}" 
+                                 alt="客家酿豆腐"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>客家酿豆腐</h3>
+                            <p class="food-type">招牌菜</p>
+                            <p class="food-desc">客家传统名菜，将豆腐挖空填入肉馅，煎至金黄后焖煮，外酥里嫩，味道鲜美，是客家宴席的必备菜肴。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>豆腐、猪肉、香菇、葱花等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/ninghua_xianghuo.jpg') }}" 
+                                 alt="宁化生鱼片"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>宁化生鱼片</h3>
+                            <p class="food-type">特色菜</p>
+                            <p class="food-desc">客家特色菜肴，选用鲜活草鱼，现杀现切，配以特制蘸料，口感鲜嫩爽滑，是客家饮食文化的代表。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>草鱼、姜蒜、辣椒、香菜、特制蘸料</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/baisha_tea.jpg') }}" 
+                                 alt="白沙茶"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>白沙茶</h3>
+                            <p class="food-type">茶饮</p>
+                            <p class="food-desc">龙岩特色茶叶，产于漳平市，香气浓郁，滋味醇厚，是福建名茶之一，深受茶友喜爱。</p>
+                            <div class="food-ingredients">
+                                <strong>主要品种：</strong>
+                                <span>水仙、佛手、铁观音等</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <form action="{{ url_for('mark_explored') }}" method="POST">
+            <input type="hidden" name="city_name" value="龙岩">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> 标记为已探索
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+<script>
+// 页面加载时标记为已探索
+document.addEventListener('DOMContentLoaded', function() {
+    markCityExplored('龙岩');
+});
+</script>
+{% endblock %}

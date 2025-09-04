@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block title %}个人中心{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user_center.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="user-center-container">
+    <div class="user-header">
+        <h1>个人中心</h1>
+        <p>管理您的账户信息和学习进度</p>
+    </div>
+    
+    <div class="user-content">
+        <!-- 个人信息卡片 -->
+        <div class="info-card">
+            <div class="card-header">
+                <h3>个人信息</h3>
+            </div>
+            <div class="card-body">
+                <div class="user-avatar-large">
+                    <img src="{{ url_for('get_avatar') }}" alt="用户头像" id="user-avatar">
+                    <div class="avatar-actions">
+                        <button id="change-avatar-btn" class="btn btn-small">
+                            <i class="fas fa-camera"></i> 更换头像
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="user-info">
+                    <div class="info-item">
+                        <label>用户名：</label>
+                        <span>{{ session.username }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 学习统计卡片 -->
+        <div class="stats-card">
+            <div class="card-header">
+                <h3>学习统计</h3>
+            </div>
+            <div class="card-body">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">{{ exploration_count }}</span>
+                            <span class="stat-label">已探索地市</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">{{ total_answers }}</span>
+                            <span class="stat-label">答题总数</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">{{ total_answers - wrong_answers }}</span>
+                            <span class="stat-label">答对题数</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-value">{{ correct_rate }}%</span>
+                            <span class="stat-label">正确率</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 地市探索进度 -->
+        <div class="progress-card">
+            <div class="card-header">
+                <h3>地市探索进度</h3>
+                <span class="progress-text">{{ exploration_count }}/5 个地市</span>
+            </div>
+            <div class="card-body">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ (exploration_count / 5 * 100) | round }}%;"></div>
+                </div>
+                <div class="cities-list">
+                    <div class="city-item">
+                        <span class="city-name">福州</span>
+                        <span class="city-status">
+                            <i class="fas fa-times-circle"></i> 未探索
+                        </span>
+                    </div>
+                    <div class="city-item">
+                        <span class="city-name">南平</span>
+                        <span class="city-status">
+                            <i class="fas fa-times-circle"></i> 未探索
+                        </span>
+                    </div>
+                    <div class="city-item">
+                        <span class="city-name">龙岩</span>
+                        <span class="city-status">
+                            <i class="fas fa-times-circle"></i> 未探索
+                        </span>
+                    </div>
+                    <div class="city-item">
+                        <span class="city-name">泉州</span>
+                        <span class="city-status">
+                            <i class="fas fa-times-circle"></i> 未探索
+                        </span>
+                    </div>
+                    <div class="city-item">
+                        <span class="city-name">莆田</span>
+                        <span class="city-status">
+                            <i class="fas fa-times-circle"></i> 未探索
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 账户管理卡片 -->
+        <div class="account-card">
+            <div class="card-header">
+                <h3>账户管理</h3>
+            </div>
+            <div class="card-body">
+                <div class="account-actions">
+                    <button id="change-password-btn" class="btn btn-secondary">
+                        <i class="fas fa-key"></i> 修改密码
+                    </button>
+                    <a href="{{ url_for('logout') }}" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> 退出登录
+                    </a>
+                    <button id="delete-account-btn" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> 注销账户
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 修改密码模态框 -->
+<div id="password-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>修改密码</h3>
+        <form id="password-form" class="auth-form">
+            <div class="form-group">
+                <label for="current-password">当前密码</label>
+                <input type="password" id="current-password" name="current_password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="new-password">新密码</label>
+                <input type="password" id="new-password" name="new_password" class="form-control" required>
+                <small class="form-text">密码长度至少6个字符</small>
+            </div>
+            <div class="form-group">
+                <label for="confirm-new-password">确认新密码</label>
+                <input type="password" id="confirm-new-password" name="confirm_new_password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn">确认修改</button>
+        </form>
+    </div>
+</div>
+
+<!-- 更换头像模态框 -->
+<div id="avatar-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>更换头像</h3>
+        <form id="avatar-form" class="auth-form" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="avatar-file">选择头像图片</label>
+                <input type="file" id="avatar-file" name="avatar" class="form-control" accept="image/*" required>
+                <small class="form-text">支持JPG、PNG格式，最大2MB</small>
+            </div>
+            <div class="avatar-preview" id="avatar-preview">
+                <img src="{{ url_for('get_avatar') }}" alt="头像预览">
+            </div>
+            <button type="submit" class="btn">上传头像</button>
+        </form>
+    </div>
+</div>
+
+<!-- 注销账户确认模态框 -->
+<div id="delete-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>确认注销账户</h3>
+        <div class="warning-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>此操作将永久删除您的账户和所有相关数据，包括答题记录和探索进度。此操作不可撤销！</p>
+        </div>
+        <form id="delete-form" class="auth-form">
+            <div class="form-group">
+                <label for="confirm-username">请输入您的用户名以确认</label>
+                <input type="text" id="confirm-username" name="confirm_username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">请输入密码以确认</label>
+                <input type="password" id="confirm-password" name="confirm_password" class="form-control" required>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancel-delete">取消</button>
+                <button type="submit" class="btn btn-danger">确认注销</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/user_center.js') }}"></script>
+{% endblock %}

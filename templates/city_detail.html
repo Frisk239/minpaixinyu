@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}{{ city_info.name }}详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/' + city_info.en_name + '.jpg') }}" 
+                 alt="{{ city_info.name }}城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>{{ city_info.name }}</h1>
+                <p class="city-subtitle">{{ city_info.subtitle }}</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：{{ city_info.location }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：{{ city_info.population }}</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：{{ city_info.dialect }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>{{ city_info.description }}</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        {% for highlight in city_info.highlights %}
+                        <div class="highlight-item">
+                            <i class="{{ highlight.icon }}"></i>
+                            <h4>{{ highlight.title }}</h4>
+                            <p>{{ highlight.description }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    {% for culture in city_info.culture %}
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/' + culture.image) }}" 
+                                 alt="{{ culture.title }}"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>{{ culture.title }}</h3>
+                            <p>{{ culture.description }}</p>
+                            {% if culture.features %}
+                            <div class="culture-features">
+                                {% for feature in culture.features %}
+                                <span class="feature-tag">{{ feature }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    {% for attraction in city_info.attractions %}
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/' + attraction.image) }}" 
+                                 alt="{{ attraction.name }}"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>{{ attraction.name }}</h3>
+                            <p class="attraction-type">{{ attraction.type }}</p>
+                            <p class="attraction-desc">{{ attraction.description }}</p>
+                            {% if attraction.tips %}
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>{{ attraction.tips }}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    {% for food in city_info.foods %}
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/' + food.image) }}" 
+                                 alt="{{ food.name }}"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>{{ food.name }}</h3>
+                            <p class="food-type">{{ food.category }}</p>
+                            <p class="food-desc">{{ food.description }}</p>
+                            {% if food.ingredients %}
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>{{ food.ingredients }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <form action="{{ url_for('mark_city_explored', city_name=city_info.en_name) }}" method="POST">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> 标记为已探索
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+{% endblock %}

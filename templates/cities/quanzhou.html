@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+
+{% block title %}泉州详情{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/city_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="city-detail-container">
+    <!-- 返回按钮 -->
+    <div class="back-button">
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> 返回地图
+        </a>
+    </div>
+
+    <!-- 城市头部信息 -->
+    <div class="city-header">
+        <div class="city-banner">
+            <img src="{{ url_for('static', filename='images/cities/quanzhou.jpg') }}" 
+                 alt="泉州城市图片" 
+                 onerror="this.src='{{ url_for('static', filename='images/default-city.jpg') }}'">
+            <div class="city-overlay">
+                <h1>泉州</h1>
+                <p class="city-subtitle">海上丝绸之路起点</p>
+            </div>
+        </div>
+        
+        <div class="city-quick-info">
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>地理位置：福建省东南部，台湾海峡西岸</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-users"></i>
+                <span>人口：约878万人</span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-language"></i>
+                <span>方言：泉州话（闽南方言）</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 城市内容区域 -->
+    <div class="city-content">
+        <!-- 导航标签 -->
+        <div class="city-tabs">
+            <button class="tab-btn active" data-tab="overview">概览</button>
+            <button class="tab-btn" data-tab="culture">文化</button>
+            <button class="tab-btn" data-tab="tourism">旅游</button>
+            <button class="tab-btn" data-tab="food">美食</button>
+        </div>
+
+        <!-- 概览标签内容 -->
+        <div class="tab-content active" id="overview-tab">
+            <div class="overview-section">
+                <h2>城市简介</h2>
+                <p>泉州市位于福建省东南沿海，是联合国教科文组织认定的海上丝绸之路起点，宋元时期的世界海洋贸易中心。泉州是著名的侨乡和台湾同胞的主要祖籍地，民营经济发达，历史文化底蕴深厚。</p>
+                
+                <div class="highlights">
+                    <h3>城市特色</h3>
+                    <div class="highlight-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-ship"></i>
+                            <h4>海丝起点</h4>
+                            <p>古代海上丝绸之路的起点，宋元时期东方第一大港，海洋贸易历史悠久，中外文化交流频繁。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-church"></i>
+                            <h4>宗教博物馆</h4>
+                            <p>多种宗教和谐共处，佛教、道教、伊斯兰教、基督教等宗教建筑众多，宗教文化丰富多彩。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-industry"></i>
+                            <h4>民营经济</h4>
+                            <p>民营经济发达，鞋服、建材、食品等产业优势明显，是福建经济发展的重要引擎。</p>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-users"></i>
+                            <h4>侨乡重镇</h4>
+                            <p>著名侨乡，海外侨胞和港澳台同胞众多，侨资侨力丰富，对外交流合作活跃。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文化标签内容 -->
+        <div class="tab-content" id="culture-tab">
+            <div class="culture-section">
+                <h2>文化特色</h2>
+                <div class="culture-grid">
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/maritime_culture.jpg') }}" 
+                                 alt="海洋文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>海洋文化</h3>
+                            <p>泉州是海洋文化的代表，海上丝绸之路的历史积淀深厚。妈祖信仰、海洋贸易、航海技术等构成了独特的海洋文化体系。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">海上丝绸之路</span>
+                                <span class="feature-tag">妈祖信仰</span>
+                                <span class="feature-tag">航海传统</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/religious_culture.jpg') }}" 
+                                 alt="宗教文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>宗教文化</h3>
+                            <p>泉州素有"宗教博物馆"之称，佛教、道教、伊斯兰教、基督教、印度教等宗教和谐共处，留下了丰富的宗教文化遗产。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">多元宗教</span>
+                                <span class="feature-tag">和谐共处</span>
+                                <span class="feature-tag">文化遗产</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="culture-item">
+                        <div class="culture-image">
+                            <img src="{{ url_for('static', filename='images/culture/folk_culture.jpg') }}" 
+                                 alt="民俗文化"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-culture.jpg') }}'">
+                        </div>
+                        <div class="culture-info">
+                            <h3>民俗文化</h3>
+                            <p>泉州民俗文化丰富多彩，南音、木偶戏、高甲戏等非物质文化遗产独具特色，民间节庆活动热闹非凡。</p>
+                            <div class="culture-features">
+                                <span class="feature-tag">南音艺术</span>
+                                <span class="feature-tag">木偶戏</span>
+                                <span class="feature-tag">民间节庆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 旅游标签内容 -->
+        <div class="tab-content" id="tourism-tab">
+            <div class="tourism-section">
+                <h2>旅游景点</h2>
+                <div class="attractions-grid">
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/kaiyuan_temple.jpg') }}" 
+                                 alt="开元寺"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>开元寺</h3>
+                            <p class="attraction-type">佛教寺院</p>
+                            <p class="attraction-desc">福建省内规模最大的佛教寺院，始建于唐朝，有"闽南甲刹"之称。寺内双塔是泉州的标志性建筑。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以参观大雄宝殿、甘露戒坛、东西双塔等建筑，了解佛教文化，感受古寺的宁静氛围。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/qingjing_temple.jpg') }}" 
+                                 alt="清净寺"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>清净寺</h3>
+                            <p class="attraction-type">伊斯兰教寺院</p>
+                            <p class="attraction-desc">中国现存最古老的伊斯兰教寺院之一，始建于北宋，是海上丝绸之路的重要见证，建筑风格独特。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以了解伊斯兰教在泉州的历史，欣赏阿拉伯风格的建筑，感受多元文化的交融。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="attraction-card">
+                        <div class="attraction-image">
+                            <img src="{{ url_for('static', filename='images/attractions/laojun_rock.jpg') }}" 
+                                 alt="清源山老君岩"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-attraction.jpg') }}'">
+                        </div>
+                        <div class="attraction-info">
+                            <h3>清源山老君岩</h3>
+                            <p class="attraction-type">道教圣地</p>
+                            <p class="attraction-desc">中国最大的道教石雕造像，雕刻于宋代，老子像神态安详，是道教文化的重要遗产。</p>
+                            <div class="attraction-tips">
+                                <strong>游览提示：</strong>
+                                <p>可以登山观景，参观老君岩造像，了解道教文化，欣赏自然风光和人文景观。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 美食标签内容 -->
+        <div class="tab-content" id="food-tab">
+            <div class="food-section">
+                <h2>特色美食</h2>
+                <div class="food-grid">
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/rouzong.jpg') }}" 
+                                 alt="肉粽"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>泉州肉粽</h3>
+                            <p class="food-type">传统小吃</p>
+                            <p class="food-desc">泉州特色粽子，用料讲究，糯米软糯，馅料丰富，有猪肉、香菇、虾米等，味道鲜美，是端午节的必备食品。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>糯米、猪肉、香菇、虾米、花生等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/mianxianhu.jpg') }}" 
+                                 alt="面线糊"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>面线糊</h3>
+                            <p class="food-type">早餐小吃</p>
+                            <p class="food-desc">泉州传统早餐，面线细如发丝，煮成糊状，配以各种配料，口感细腻，营养丰富，是泉州人最爱的早餐之一。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>面线、猪骨汤、海鲜、肉类、蔬菜等</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-card">
+                        <div class="food-image">
+                            <img src="{{ url_for('static', filename='images/foods/haishen.jpg') }}" 
+                                 alt="海蛎煎"
+                                 onerror="this.src='{{ url_for('static', filename='images/default-food.jpg') }}'">
+                        </div>
+                        <div class="food-info">
+                            <h3>海蛎煎</h3>
+                            <p class="food-type">特色小吃</p>
+                            <p class="food-desc">泉州特色海鲜小吃，选用新鲜海蛎，配以地瓜粉、鸡蛋等煎制而成，外酥里嫩，海鲜味浓郁，是夜市常见的美食。</p>
+                            <div class="food-ingredients">
+                                <strong>主要食材：</strong>
+                                <span>海蛎、地瓜粉、鸡蛋、葱花、香菜等</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 探索完成按钮 -->
+    <div class="explore-actions">
+        <form action="{{ url_for('mark_explored') }}" method="POST">
+            <input type="hidden" name="city_name" value="泉州">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-check-circle"></i> 标记为已探索
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
+<script>
+// 页面加载时标记为已探索
+document.addEventListener('DOMContentLoaded', function() {
+    markCityExplored('泉州');
+});
+</script>
+{% endblock %}

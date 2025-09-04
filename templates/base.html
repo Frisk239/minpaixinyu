@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闽派新语 - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">闽派新语</div>
+        <div class="nav-items">
+            <a href="{{ url_for('index') }}" class="nav-item">首页</a>
+            <a href="{{ url_for('ai_chat') }}" class="nav-item">AI问答</a>
+            <a href="{{ url_for('ebook') }}" class="nav-item">学习日志</a>
+            <a href="{{ url_for('quiz') }}" class="nav-item">互动问答</a>
+            
+            <!-- 用户状态区域 -->
+            <div class="user-section" id="user-section">
+                <!-- 未登录状态：只显示登录注册按钮 -->
+                <div class="auth-buttons" id="auth-buttons">
+                    <a href="{{ url_for('login') }}" class="nav-item auth-btn">登录</a>
+                    <a href="{{ url_for('register') }}" class="nav-item auth-btn">注册</a>
+                </div>
+                
+                <!-- 已登录状态：显示头像和个人中心链接 -->
+                <div class="user-info" id="user-info" style="display: none;">
+                    <div class="user-avatar">
+                        <img src="{{ url_for('get_avatar') }}" alt="用户头像" id="avatar-img">
+                    </div>
+                    <a href="{{ url_for('user_center') }}" class="nav-item user-center-link">
+                        <i class="fas fa-user"></i> 个人中心
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,324 @@
+/* 闽派新语 - 米色主题样式 */
+:root {
+    /* 米色主题色彩变量 */
+    --primary-beige: #F5F5DC;        /* 米色主色 */
+    --beige-dark: #D2B48C;           /* 深米色 */
+    --beige-light: #FDF5E6;          /* 浅米色 */
+    --gold-accent: #DAA520;          /* 金色点缀 */
+    --text-dark: #5D4E37;            /* 深棕色文字 */
+    --text-medium: #8B7355;          /* 中等棕色 */
+    --text-light: #A0896B;           /* 浅棕色 */
+    --white: #ffffff;
+    --shadow: 0 2px 8px rgba(93, 78, 55, 0.15);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: '微软雅黑', 'Microsoft YaHei', sans-serif;
+    background-color: var(--beige-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* 导航栏样式 */
+.navbar {
+    background: var(--primary-beige);
+    border-bottom: 2px solid var(--beige-dark);
+    padding: 15px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--text-dark);
+    font-family: '微软雅黑', sans-serif;
+}
+
+.nav-items {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-item {
+    color: var(--text-dark);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: var(--transition);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-item:hover {
+    background-color: var(--beige-dark);
+    color: var(--text-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(93, 78, 55, 0.2);
+}
+
+/* 认证按钮样式 */
+.auth-btn {
+    border: 1px solid var(--gold-accent);
+    margin-left: 5px;
+}
+
+.auth-btn:hover {
+    background-color: var(--gold-accent);
+    color: white;
+    border-color: var(--gold-accent);
+}
+
+/* 用户信息区域 */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* 用户头像样式 */
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--gold-accent);
+    transition: var(--transition);
+    flex-shrink: 0;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.3);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 个人中心链接特殊样式 */
+.user-center-link {
+    background-color: var(--gold-accent);
+    color: white !important;
+}
+
+.user-center-link:hover {
+    background-color: var(--text-dark);
+    color: white !important;
+}
+
+/* 内容区域 */
+.content {
+    margin-top: 80px;
+    padding: 20px;
+    min-height: calc(100vh - 80px);
+}
+
+/* 通用卡片样式 */
+.card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--beige-dark);
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--gold-accent);
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.btn:hover {
+    background-color: var(--text-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(93, 78, 55, 0.2);
+}
+
+.btn-secondary {
+    background-color: var(--beige-dark);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-medium);
+    color: white;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid var(--beige-dark);
+    border-radius: var(--border-radius);
+    font-size: 16px;
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--gold-accent);
+    box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 3%;
+    }
+    
+    .nav-items {
+        gap: 15px;
+    }
+    
+    .nav-item {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+    
+    .logo {
+        font-size: 20px;
+    }
+    
+    .content {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .nav-items {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .user-info {
+        gap: 10px;
+    }
+}
+
+/* 错误和成功消息样式 */
+.alert {
+    padding: 12px 16px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    background-color: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+}
+
+.alert-success {
+    background-color: #efe;
+    color: #363;
+    border: 1px solid #cfc;
+}
+
+/* 加载动画 */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--beige-dark);
+    border-radius: 50%;
+    border-top-color: var(--gold-accent);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 模态框基础样式 */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(93, 78, 55, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-medium);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.close-btn:hover {
+    color: var(--text-dark);
+}

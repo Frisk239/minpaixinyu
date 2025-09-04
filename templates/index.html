@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}闽派新语 - 福建文化探索{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/map.css') }}">
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+{% endblock %}
+
+{% block content %}
+<div class="map-container">
+    <div class="map-header">
+        <h1>福建文化探索地图</h1>
+        <p>点击地市探索福建各地的文化特色</p>
+    </div>
+    
+    <div class="map-wrapper">
+        <div id="fujian-map" class="fujian-map"></div>
+        
+        <!-- 地图图例 -->
+        <div class="map-legend">
+            <div class="legend-item">
+                <div class="legend-color unexplored"></div>
+                <span>未探索</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color explored"></div>
+                <span>已探索</span>
+            </div>
+        </div>
+        
+        <!-- 地图控制按钮 -->
+        <div class="map-controls">
+            <button class="map-btn" onclick="resetMapView()" title="重置视图">
+                <i class="fas fa-sync-alt"></i>
+            </button>
+            <button class="map-btn" onclick="zoomIn()" title="放大">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button class="map-btn" onclick="zoomOut()" title="缩小">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="city-info">
+        <h3>探索福建文化</h3>
+        <p>点击地图上的地市，了解各地的历史文化、旅游景点和特色美食</p>
+    </div>
+</div>
+
+<!-- 城市详情模态框 -->
+<div id="city-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2 id="modal-title">城市名称</h2>
+        <p id="modal-description">城市描述信息...</p>
+        <div class="modal-actions">
+            <button id="explore-btn" class="btn btn-primary">探索详情</button>
+            <button id="close-modal-btn" class="btn btn-secondary">关闭</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

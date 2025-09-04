@@ -1,0 +1,486 @@
+/* 地图页面样式 */
+.map-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.map-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.map-header h1 {
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.map-header p {
+    color: var(--text-medium);
+    font-size: 1.2rem;
+}
+
+/* 地图包装器 */
+.map-wrapper {
+    position: relative;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--beige-dark);
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+/* 地图容器 */
+.fujian-map {
+    width: 100%;
+    height: 600px;
+    min-height: 400px;
+}
+
+/* 地图图例 */
+.map-legend {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(93, 78, 55, 0.2);
+    border: 1px solid var(--beige-dark);
+    z-index: 10;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.legend-item:last-child {
+    margin-bottom: 0;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid var(--beige-dark);
+}
+
+.legend-color.unexplored {
+    background-color: var(--beige-dark);
+}
+
+.legend-color.explored {
+    background-color: #2ed573;
+}
+
+/* 城市信息区域 */
+.city-info {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--beige-dark);
+    text-align: center;
+}
+
+.city-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.city-info p {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* 地图控制按钮 */
+.map-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.map-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--beige-dark);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-dark);
+}
+
+.map-btn:hover {
+    background: var(--gold-accent);
+    color: white;
+    border-color: var(--gold-accent);
+    transform: translateY(-2px);
+}
+
+/* 城市详情模态框 */
+#city-modal .modal-content {
+    max-width: 500px;
+    text-align: center;
+}
+
+#modal-title {
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+#modal-description {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+/* 探索进度指示器 */
+.exploration-progress {
+    background: var(--beige-light);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.progress-text {
+    color: var(--text-dark);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 8px;
+    background: var(--beige-dark);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gold-accent);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* 地图加载状态 */
+.map-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background: var(--beige-light);
+    border-radius: 12px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--beige-dark);
+    border-top: 3px solid var(--gold-accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.map-loading p {
+    margin-left: 15px;
+    color: var(--text-medium);
+}
+
+/* 地图错误状态 */
+.map-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    background: var(--beige-light);
+    border-radius: 12px;
+    text-align: center;
+}
+
+.map-error i {
+    font-size: 3rem;
+    color: #ff4757;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.map-error p {
+    color: var(--text-medium);
+    margin-bottom: 20px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .map-container {
+        padding: 15px;
+    }
+    
+    .map-header h1 {
+        font-size: 2rem;
+    }
+    
+    .fujian-map {
+        height: 400px;
+    }
+    
+    .map-legend {
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+    }
+    
+    .map-controls {
+        bottom: 10px;
+        left: 10px;
+    }
+    
+    .map-btn {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .city-info {
+        padding: 20px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    .modal-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .map-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .map-header p {
+        font-size: 1rem;
+    }
+    
+    .fujian-map {
+        height: 300px;
+    }
+    
+    .map-legend {
+        position: static;
+        margin: 15px auto;
+        width: fit-content;
+    }
+    
+    .map-controls {
+        position: static;
+        justify-content: center;
+        margin: 15px 0;
+    }
+    
+    .city-info {
+        padding: 15px;
+    }
+}
+
+/* 地图工具栏 */
+.map-toolbar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(93, 78, 55, 0.2);
+    border: 1px solid var(--beige-dark);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+}
+
+.tool-btn {
+    width: 35px;
+    height: 35px;
+    background: var(--beige-light);
+    border: 1px solid var(--beige-dark);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-dark);
+}
+
+.tool-btn:hover {
+    background: var(--gold-accent);
+    color: white;
+    border-color: var(--gold-accent);
+}
+
+.tool-btn.active {
+    background: var(--gold-accent);
+    color: white;
+    border-color: var(--gold-accent);
+}
+
+/* 缩放控制 */
+.zoom-controls {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(93, 78, 55, 0.2);
+    border: 1px solid var(--beige-dark);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.zoom-btn {
+    width: 35px;
+    height: 35px;
+    background: var(--beige-light);
+    border: 1px solid var(--beige-dark);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-dark);
+}
+
+.zoom-btn:hover {
+    background: var(--gold-accent);
+    color: white;
+    border-color: var(--gold-accent);
+}
+
+/* 地图提示框 */
+.echarts-tooltip {
+    background: var(--white) !important;
+    border: 1px solid var(--beige-dark) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--shadow) !important;
+    color: var(--text-dark) !important;
+}
+
+.echarts-tooltip .tooltip-title {
+    color: var(--gold-accent) !important;
+    font-weight: bold !important;
+    border-bottom: 1px solid var(--beige-dark) !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+/* 动画效果 */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* 高亮效果 */
+.highlight-city {
+    animation: highlight 1.5s ease-in-out;
+}
+
+@keyframes highlight {
+    0%, 100% {
+        fill: var(--beige-dark);
+    }
+    50% {
+        fill: var(--gold-accent);
+    }
+}
+
+/* 城市标记样式 */
+.city-marker-container {
+    background: transparent !important;
+    border: none !important;
+}
+
+.city-marker {
+    background: var(--gold-accent);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    border: 2px solid white;
+    white-space: nowrap;
+}
+
+/* Leaflet 弹窗样式 */
+.leaflet-popup-content-wrapper {
+    background: var(--white) !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow) !important;
+    border: 1px solid var(--beige-dark) !important;
+}
+
+.leaflet-popup-content {
+    margin: 15px !important;
+    color: var(--text-dark) !important;
+    font-family: inherit !important;
+}
+
+.leaflet-popup-tip {
+    background: var(--white) !important;
+    border: 1px solid var(--beige-dark) !important;
+}
+
+/* 打印样式 */
+@media print {
+    .map-controls,
+    .map-legend,
+    .map-toolbar,
+    .zoom-controls {
+        display: none;
+    }
+    
+    .fujian-map {
+        height: 500px;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .map-wrapper {
+        box-shadow: none;
+        border: none;
+    }
+}

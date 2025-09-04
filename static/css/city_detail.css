@@ -1,0 +1,405 @@
+/* 地市详情页面样式 */
+.city-detail-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.back-button {
+    margin-bottom: 20px;
+}
+
+/* 城市头部样式 */
+.city-header {
+    margin-bottom: 30px;
+}
+
+.city-banner {
+    position: relative;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.city-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.city-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 30px;
+}
+
+.city-overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.city-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.city-quick-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-item i {
+    color: var(--gold-accent);
+    font-size: 1.2rem;
+}
+
+/* 标签导航 */
+.city-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--beige-dark);
+    padding-bottom: 10px;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+    color: var(--text-medium);
+}
+
+.tab-btn:hover {
+    background-color: var(--beige-dark);
+    color: var(--text-dark);
+}
+
+.tab-btn.active {
+    background-color: var(--gold-accent);
+    color: white;
+}
+
+/* 标签内容 */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 概览部分 */
+.overview-section h2 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.overview-section p {
+    line-height: 1.8;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.highlights h3 {
+    color: var(--text-dark);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.highlight-item {
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.highlight-item i {
+    font-size: 2rem;
+    color: var(--gold-accent);
+    margin-bottom: 15px;
+    display: block;
+}
+
+.highlight-item h4 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* 文化部分 */
+.culture-grid {
+    display: grid;
+    gap: 30px;
+}
+
+.culture-item {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.culture-image {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.culture-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.culture-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+.culture-features {
+    margin-top: 15px;
+}
+
+.feature-tag {
+    display: inline-block;
+    background-color: var(--beige-dark);
+    color: var(--text-dark);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+/* 旅游景点部分 */
+.attractions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.attraction-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.attraction-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.attraction-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.attraction-card:hover .attraction-image img {
+    transform: scale(1.05);
+}
+
+.attraction-info {
+    padding: 20px;
+}
+
+.attraction-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.attraction-type {
+    color: var(--gold-accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.attraction-desc {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.attraction-tips {
+    background-color: var(--beige-light);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--gold-accent);
+}
+
+.attraction-tips strong {
+    color: var(--text-dark);
+}
+
+/* 美食部分 */
+.food-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.food-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.food-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.food-card:hover .food-image img {
+    transform: scale(1.05);
+}
+
+.food-info {
+    padding: 20px;
+}
+
+.food-info h3 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.food-type {
+    color: var(--gold-accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.food-desc {
+    color: var(--text-medium);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.food-ingredients {
+    background-color: var(--beige-light);
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.food-ingredients strong {
+    color: var(--text-dark);
+}
+
+/* 探索完成按钮 */
+.explore-actions {
+    margin-top: 40px;
+    text-align: center;
+    padding: 30px;
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.explore-actions .btn {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .city-banner {
+        height: 200px;
+    }
+    
+    .city-overlay h1 {
+        font-size: 2rem;
+    }
+    
+    .city-tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .culture-item {
+        grid-template-columns: 1fr;
+    }
+    
+    .attractions-grid,
+    .food-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .city-detail-container {
+        padding: 15px;
+    }
+    
+    .city-banner {
+        height: 150px;
+    }
+    
+    .city-overlay {
+        padding: 20px;
+    }
+    
+    .city-overlay h1 {
+        font-size: 1.5rem;
+    }
+    
+    .city-subtitle {
+        font-size: 1rem;
+    }
+    
+    .city-quick-info {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
