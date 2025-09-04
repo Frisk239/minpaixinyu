@@ -490,14 +490,8 @@ def get_explorations():
         (session['user_id'],)
     ).fetchall()
     
-    # 转换城市名称格式：从"闽派新语 - 福州"到"福州"
-    explored_cities = []
-    for exp in explorations:
-        city_name = exp['city_name']
-        if city_name.startswith('闽派新语 - '):
-            explored_cities.append(city_name.replace('闽派新语 - ', ''))
-        else:
-            explored_cities.append(city_name)
+    # 返回数据库原始的城市名称格式，让客户端处理显示格式
+    explored_cities = [exp['city_name'] for exp in explorations]
     
     return jsonify({
         'explorations': explored_cities

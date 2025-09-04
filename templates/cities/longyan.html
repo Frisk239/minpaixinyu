@@ -267,12 +267,9 @@
 
     <!-- 探索完成按钮 -->
     <div class="explore-actions">
-        <form action="{{ url_for('mark_explored') }}" method="POST">
-            <input type="hidden" name="city_name" value="龙岩">
-            <button type="submit" class="btn btn-primary">
-                <i class="fas fa-check-circle"></i> 标记为已探索
-            </button>
-        </form>
+        <button id="mark-explored-btn" class="btn btn-primary">
+            <i class="fas fa-check-circle"></i> 标记为已探索
+        </button>
     </div>
 </div>
 {% endblock %}
@@ -280,9 +277,13 @@
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/city_detail.js') }}"></script>
 <script>
-// 页面加载时标记为已探索
 document.addEventListener('DOMContentLoaded', function() {
-    markCityExplored('龙岩');
+    const markBtn = document.getElementById('mark-explored-btn');
+    if (markBtn) {
+        markBtn.addEventListener('click', function() {
+            markCityExplored('龙岩');
+        });
+    }
 });
 </script>
 {% endblock %}

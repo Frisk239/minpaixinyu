@@ -6,15 +6,15 @@ let cityLayers = {};
 
 // 城市坐标配置
 const cityCoordinates = {
-    '福州': [26.0742, 119.3062],
-    '南平': [26.6415, 118.1777],
-    '龙岩': [25.0911, 117.0178],
-    '泉州': [24.8739, 118.6759],
-    '莆田': [25.4310, 119.0078],
-    '厦门': [24.4798, 118.0894],
-    '漳州': [24.5130, 117.6471],
-    '三明': [26.2639, 117.6305],
-    '宁德': [26.6657, 119.5479]
+    '福州市': [26.0742, 119.3062],
+    '南平市': [26.6415, 118.1777],
+    '龙岩市': [25.0911, 117.0178],
+    '泉州市': [24.8739, 118.6759],
+    '莆田市': [25.4310, 119.0078],
+    '厦门市': [24.4798, 118.0894],
+    '漳州市': [24.5130, 117.6471],
+    '三明市': [26.2639, 117.6305],
+    '宁德市': [26.6657, 119.5479]
 };
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -109,14 +109,14 @@ function initMap() {
 // 添加城市标记
 function addCityMarkers() {
     // 可交互的城市列表
-    const interactiveCities = ['福州', '南平', '龙岩', '泉州', '莆田'];
+    const interactiveCities = ['福州市', '南平市', '龙岩市', '泉州市', '莆田市'];
     
     Object.entries(cityCoordinates).forEach(([cityName, coords]) => {
         // 只为可交互的城市添加标记
         if (interactiveCities.includes(cityName)) {
             const marker = L.marker(coords, {
                 icon: L.divIcon({
-                    html: `<div class="city-marker">${cityName}</div>`,
+                    html: `<div class="city-marker">${cityName.replace('市', '')}</div>`,
                     className: 'city-marker-container',
                     iconSize: [60, 30]
                 })
@@ -132,11 +132,13 @@ function addCityMarkers() {
 // 处理城市点击事件
 function handleCityClick(cityName) {
     // 可交互的城市列表
-    const interactiveCities = ['福州', '南平', '龙岩', '泉州', '莆田'];
+    const interactiveCities = ['福州市', '南平市', '龙岩市', '泉州市', '莆田市'];
     
     // 只对可交互的城市显示弹窗
     if (interactiveCities.includes(cityName)) {
-        const cityInfo = getCityInfo(cityName);
+        // 移除"市"后缀以匹配citiesInfo中的键名
+        const displayName = cityName.replace('市', '');
+        const cityInfo = getCityInfo(displayName);
         if (cityInfo) {
             showCityModal(cityInfo);
         }
@@ -261,11 +263,20 @@ function initModalEvents() {
 
 // 城市名称映射（数据库名称 -> 显示名称）
 const cityNameMap = {
-    '闽派新语 - 福州': '福州',
-    '闽派新语 - 南平': '南平',
-    '闽派新语 - 龙岩': '龙岩',
-    '闽派新语 - 泉州': '泉州', 
-    '闽派新语 - 莆田': '莆田'
+    '闽派新语 - 福州': '福州市',
+    '闽派新语 - 南平': '南平市',
+    '闽派新语 - 龙岩': '龙岩市',
+    '闽派新语 - 泉州': '泉州市', 
+    '闽派新语 - 莆田': '莆田市'
+};
+
+// 反向映射（显示名称 -> 数据库名称）
+const reverseCityNameMap = {
+    '福州市': '闽派新语 - 福州',
+    '南平市': '闽派新语 - 南平',
+    '龙岩市': '闽派新语 - 龙岩',
+    '泉州市': '闽派新语 - 泉州',
+    '莆田市': '闽派新语 - 莆田'
 };
 
 // 加载用户探索记录
@@ -279,7 +290,7 @@ function loadExploredCities() {
                 fetch('/api/get-explorations')
                     .then(response => response.json())
                     .then(data => {
-                        // 直接使用API返回的城市名称（后端已经处理过格式转换）
+                        // 直接使用API返回的数据库格式城市名称，不进行转换
                         exploredCities = new Set(data.explorations);
                         updateMapStyle();
                     })
@@ -308,7 +319,16 @@ function reloadExploredCities() {
     fetch('/api/get-explorations')
         .then(response => response.json())
         .then(data => {
-            exploredCities = new Set(data.explorations);
+            // 将API返回的数据库格式城市名称转换为显示格式
+            const displayCities = data.explorations.map(dbName => {
+                // 如果城市名称以"闽派新语 - "开头，转换为显示格式
+                if (dbName.startsWith('闽派新语 - ')) {
+                    return dbName.replace('闽派新语 - ', '');
+                }
+                // 否则直接使用（兼容旧格式）
+                return dbName;
+            });
+            exploredCities = new Set(displayCities);
             updateMapStyle();
         })
         .catch(error => {
@@ -320,8 +340,14 @@ function reloadExploredCities() {
 function updateMapStyle() {
     if (fujianMap && cityLayers) {
         Object.entries(cityLayers).forEach(([cityName, layer]) => {
+            // 检查数据库格式的城市名称（"闽派新语 - 城市名"）
+            const dbCityName = reverseCityNameMap[cityName];
+            
+            // 如果城市在探索记录中（数据库格式），或者直接匹配显示格式（兼容旧数据）
+            const isExplored = exploredCities.has(dbCityName) || exploredCities.has(cityName);
+            
             layer.setStyle({
-                fillColor: exploredCities.has(cityName) ? '#2ed573' : '#D2B48C'
+                fillColor: isExplored ? '#2ed573' : '#D2B48C'
             });
         });
     }

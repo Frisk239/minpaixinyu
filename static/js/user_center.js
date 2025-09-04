@@ -30,6 +30,15 @@ const cityNameMap = {
     '闽派新语 - 莆田': '莆田'
 };
 
+// 反向映射（显示名称 -> 数据库名称）
+const reverseCityNameMap = {
+    '福州': '闽派新语 - 福州',
+    '南平': '闽派新语 - 南平',
+    '龙岩': '闽派新语 - 龙岩',
+    '泉州': '闽派新语 - 泉州',
+    '莆田': '闽派新语 - 莆田'
+};
+
 // 更新城市列表显示
 function updateCitiesList(exploredCities) {
     const citiesList = document.querySelector('.cities-list');
@@ -41,8 +50,8 @@ function updateCitiesList(exploredCities) {
         const displayName = item.querySelector('.city-name').textContent.trim();
         const statusSpan = item.querySelector('.city-status');
         
-        // 查找对应的数据库名称
-        const dbName = Object.keys(cityNameMap).find(key => cityNameMap[key] === displayName);
+        // 获取对应的数据库名称
+        const dbName = reverseCityNameMap[displayName];
         
         if (dbName && exploredCities.has(dbName)) {
             // 已探索
