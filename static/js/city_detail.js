@@ -225,12 +225,16 @@ function initMarkExploredButton() {
             const pageTitle = document.title;
             let cityName = '';
             
-            // 从标题中提取城市名称（移除"详情"后缀）
+            // 从标题中提取城市名称（保持"闽派新语 - 城市名"格式）
             if (pageTitle.includes('详情')) {
                 cityName = pageTitle.replace('详情', '').trim();
+                // 确保格式为"闽派新语 - 城市名"
+                if (!cityName.startsWith('闽派新语 - ')) {
+                    cityName = '闽派新语 - ' + cityName;
+                }
             } else {
                 // 如果标题格式不符合预期，使用默认值
-                cityName = '福州'; // 默认值，可以根据需要修改
+                cityName = '闽派新语 - 福州'; // 默认值，使用新格式
             }
             
             // 首先检查是否已经探索过

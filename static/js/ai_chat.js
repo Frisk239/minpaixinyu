@@ -67,12 +67,12 @@ function initChatForm() {
             showLoading();
             
             // 发送到后端API
-            const response = await fetch('/api/ai-chat', {
+            const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ question: message })
             });
             
             if (!response.ok) {
@@ -85,8 +85,8 @@ function initChatForm() {
             hideLoading();
             
             // 添加AI回复
-            if (data.response) {
-                addAIMessage(data.response);
+            if (data.answer) {
+                addAIMessage(data.answer);
             } else {
                 addAIMessage('抱歉，我暂时无法回答这个问题。请尝试其他问题。');
             }

@@ -183,14 +183,26 @@ def user_center():
     wrong_answers = total_answers - correct_answers
     correct_rate = round((correct_answers / total_answers) * 100) if total_answers > 0 else 0
     
-    # 获取探索统计
+    # 获取探索统计和探索记录
     exploration_count = db.execute('SELECT COUNT(*) FROM city_explorations WHERE user_id = ?', (session['user_id'],)).fetchone()[0]
+    explorations = db.execute('SELECT city_name FROM city_explorations WHERE user_id = ?', (session['user_id'],)).fetchall()
+    
+    # 将探索记录转换为集合以便快速查找
+    explored_cities = set()
+    for exp in explorations:
+        city_name = exp['city_name']
+        # 转换格式：从"闽派新语 - 福州"到"福州"
+        if city_name.startswith('闽派新语 - '):
+            explored_cities.add(city_name.replace('闽派新语 - ', ''))
+        else:
+            explored_cities.add(city_name)
     
     return render_template('user_center.html',
                           total_answers=total_answers, 
                           correct_rate=correct_rate, 
                           wrong_answers=wrong_answers,
-                          exploration_count=exploration_count)
+                          exploration_count=exploration_count,
+                          explored_cities=explored_cities)
 
 # ===== 主要功能路由 =====
 @app.route('/')
@@ -273,11 +285,19 @@ def api_chat():
             ai_config = json.load(f)
         
         from openai import OpenAI
+        
+        # 初始化 DeepSeek 客户端
+        api_key = ai_config['deepseek_api_key']
+        print(f"使用API密钥: {api_key[:8]}...{api_key[-4:]}")
+        
         client = OpenAI(
-            api_key=ai_config['deepseek_api_key'],
+            api_key=api_key,
             base_url="https://api.deepseek.com/v1"
         )
 
+        print(f"发送问题到DeepSeek: {question}")
+        
+        # 调用API
         response = client.chat.completions.create(
             model="deepseek-chat",
             messages=[
@@ -288,7 +308,10 @@ def api_chat():
             max_tokens=2000
         )
         
+        print(f"API响应: {response}")
+        
         answer = response.choices[0].message.content
+        print(f"AI回答: {answer[:100]}...")  # 只显示前100个字符
         return jsonify({'answer': answer})
 
     except FileNotFoundError:
@@ -297,10 +320,26 @@ def api_chat():
             'details': '请确保ai.json文件存在并包含有效的API密钥'
         }), 500
     except Exception as e:
-        return jsonify({
-            'error': '抱歉，无法获取回答',
-            'details': f'API调用失败: {str(e)}'
-        }), 500
+        # 记录详细的错误信息
+        print(f"DeepSeek API调用失败: {str(e)}")
+        print(f"API密钥: {ai_config['deepseek_api_key'][:10]}...")  # 只显示前10个字符
+        
+        # 提供备用回答
+        backup_answers = {
+            '福州': '福州是福建省的省会城市，有着2200多年的建城史，是国家历史文化名城。因城内遍植榕树，别称"榕城"。',
+            '南平': '南平市位于福建省北部，武夷山脉北段东南侧，闽江上游，是福建通往内地的咽喉要道。',
+            '龙岩': '龙岩市位于福建省西部，地处闽粤赣三省交界，是重要的客家聚居地和革命老区。',
+            '泉州': '泉州市位于福建省东南沿海，是联合国教科文组织认定的海上丝绸之路起点。',
+            '莆田': '莆田市位于福建省东部沿海，是妈祖文化的发祥地，也是著名的侨乡。',
+            'default': '抱歉，目前无法获取AI回答。您可以尝试询问关于福建文化、历史、地理等方面的问题。'
+        }
+        
+        # 检查问题中是否包含城市名称
+        for city in ['福州', '南平', '龙岩', '泉州', '莆田']:
+            if city in question:
+                return jsonify({'answer': backup_answers[city]})
+        
+        return jsonify({'answer': backup_answers['default']})
 
 @app.route('/api/get-questions')
 def get_questions():
@@ -369,6 +408,77 @@ def check_explored():
     
     return jsonify({'explored': exploration is not None})
 
+@app.route('/api/change-password', methods=['POST'])
+def change_password():
+    if 'user_id' not in session:
+        return jsonify({'error': '未登录'}), 401
+    
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_new_password = request.form.get('confirm_new_password')
+    
+    if not all([current_password, new_password, confirm_new_password]):
+        return jsonify({'error': '所有字段都必须填写'}), 400
+    
+    if new_password != confirm_new_password:
+        return jsonify({'error': '新密码和确认密码不一致'}), 400
+    
+    if len(new_password) < 6:
+        return jsonify({'error': '新密码长度至少6个字符'}), 400
+    
+    db = get_db()
+    user = db.execute(
+        'SELECT password FROM users WHERE id = ?', (session['user_id'],)
+    ).fetchone()
+    
+    if not user or user['password'] != current_password:
+        return jsonify({'error': '当前密码不正确'}), 400
+    
+    try:
+        db.execute(
+            'UPDATE users SET password = ? WHERE id = ?',
+            (new_password, session['user_id'])
+        )
+        db.commit()
+        return jsonify({'success': True})
+    except sqlite3.Error as e:
+        db.rollback()
+        return jsonify({'error': f'数据库错误: {str(e)}'}), 500
+
+@app.route('/api/delete-account', methods=['POST'])
+def delete_account():
+    if 'user_id' not in session:
+        return jsonify({'error': '未登录'}), 401
+    
+    confirm_username = request.form.get('confirm_username')
+    confirm_password = request.form.get('confirm_password')
+    
+    if not all([confirm_username, confirm_password]):
+        return jsonify({'error': '所有字段都必须填写'}), 400
+    
+    db = get_db()
+    user = db.execute(
+        'SELECT username, password FROM users WHERE id = ?', (session['user_id'],)
+    ).fetchone()
+    
+    if not user or user['username'] != confirm_username or user['password'] != confirm_password:
+        return jsonify({'error': '用户名或密码不正确'}), 400
+    
+    try:
+        # 删除用户的所有相关数据
+        db.execute('DELETE FROM answer_records WHERE user_id = ?', (session['user_id'],))
+        db.execute('DELETE FROM city_explorations WHERE user_id = ?', (session['user_id'],))
+        db.execute('DELETE FROM users WHERE id = ?', (session['user_id'],))
+        db.commit()
+        
+        # 清除会话
+        session.clear()
+        
+        return jsonify({'success': True})
+    except sqlite3.Error as e:
+        db.rollback()
+        return jsonify({'error': f'数据库错误: {str(e)}'}), 500
+
 @app.route('/api/get-explorations')
 def get_explorations():
     if 'user_id' not in session:
@@ -380,8 +490,17 @@ def get_explorations():
         (session['user_id'],)
     ).fetchall()
     
+    # 转换城市名称格式：从"闽派新语 - 福州"到"福州"
+    explored_cities = []
+    for exp in explorations:
+        city_name = exp['city_name']
+        if city_name.startswith('闽派新语 - '):
+            explored_cities.append(city_name.replace('闽派新语 - ', ''))
+        else:
+            explored_cities.append(city_name)
+    
     return jsonify({
-        'explorations': [exp['city_name'] for exp in explorations]
+        'explorations': explored_cities
     })
 
 # 提供PDF文件的路由

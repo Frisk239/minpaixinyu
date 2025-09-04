@@ -36,10 +36,11 @@ function initMap() {
     // 初始化Leaflet地图
     fujianMap = L.map('fujian-map').setView([26.0, 118.0], 7);
     
-    // 添加地图瓦片图层
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 18,
+    // 添加地图瓦片图层 - 使用无国界样式
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
     }).addTo(fujianMap);
     
     // 加载福建地图GeoJSON数据
@@ -260,11 +261,11 @@ function initModalEvents() {
 
 // 城市名称映射（数据库名称 -> 显示名称）
 const cityNameMap = {
-    'fuzhou': '福州',
-    'nanping': '南平',
-    'longyan': '龙岩',
-    'quanzhou': '泉州', 
-    'putian': '莆田'
+    '闽派新语 - 福州': '福州',
+    '闽派新语 - 南平': '南平',
+    '闽派新语 - 龙岩': '龙岩',
+    '闽派新语 - 泉州': '泉州', 
+    '闽派新语 - 莆田': '莆田'
 };
 
 // 加载用户探索记录
@@ -278,14 +279,8 @@ function loadExploredCities() {
                 fetch('/api/get-explorations')
                     .then(response => response.json())
                     .then(data => {
-                        // 将数据库中的英文名称转换为中文显示名称
-                        const exploredDisplayCities = new Set();
-                        data.explorations.forEach(dbName => {
-                            if (cityNameMap[dbName]) {
-                                exploredDisplayCities.add(cityNameMap[dbName]);
-                            }
-                        });
-                        exploredCities = exploredDisplayCities;
+                        // 直接使用API返回的城市名称（后端已经处理过格式转换）
+                        exploredCities = new Set(data.explorations);
                         updateMapStyle();
                     })
                     .catch(error => {
